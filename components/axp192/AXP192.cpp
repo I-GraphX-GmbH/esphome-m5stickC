@@ -367,7 +367,7 @@ uint8_t AXP192::GetWarningLeve(void)
 void AXP192::DeepSleep(uint64_t time_in_us)
 {
     SetSleep();
-    esp_sleep_enable_ext0_wakeup((gpio_num_t)37, LOW);
+    esp_sleep_enable_ext0_wakeup((gpio_num_t)37, 0);
     if (time_in_us > 0)
     {
         esp_sleep_enable_timer_wakeup(time_in_us);

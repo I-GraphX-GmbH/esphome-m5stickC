@@ -92,11 +92,11 @@ namespace esphome
                 return;
             }
 
-            ESP_LOGD(BINARY_TAG, "type: %d, input: %s, power: %s, irq: %s",
+            ESP_LOGD(BINARY_TAG, "type: %d, input: %d, power: %d, irq: %d",
                      monitor_,
-                     uint32_to_string(input_status).c_str(),
-                     uint32_to_string(power_status).c_str(),
-                     uint32_to_string(irq_status).c_str());
+                     input_status,
+                     power_status,
+                     irq_status);
 
             publish_state(should_fire);
             last_state_ = should_fire;
@@ -105,7 +105,7 @@ namespace esphome
         light::LightTraits AXP192Backlight::get_traits()
         {
             auto traits = light::LightTraits();
-            traits.set_supports_brightness(true);
+            traits.set_supported_color_modes({light::ColorMode::BRIGHTNESS});
             return traits;
         }
 
