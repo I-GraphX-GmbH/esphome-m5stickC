@@ -80,7 +80,6 @@ namespace esphome
             //46:1 - short key press  0b00000000 00000000 00000010 00000000
             if (monitor_ == Monitor::MONITOR_BUTTON && (irq_status & 0x00000200))
             {
-                axp_->ClearPressIRQ(true, false);
                 should_fire = true;
             }
             //47:0 - bat critical low 0b00000000 00000000 00000000 00000001
@@ -196,6 +195,10 @@ namespace esphome
             for (auto monitor : monitors_)
             {
                 monitor->update(input_status, power_status, irq_status);
+            }
+            //reset button irq
+            if(irq_status & 0x00000200) {
+                axp_->ClearPressIRQ(true, false);
             }
             //ESP_LOGD(TAG, "Brightness=%f (Curr: %f)", brightness_, curr_brightness_);
             if (brightness_ == curr_brightness_)
