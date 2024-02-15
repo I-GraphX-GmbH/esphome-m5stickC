@@ -25,7 +25,7 @@ namespace esphome
     public:
       void set_type(const Monitor &monitor) { monitor_ = monitor; }
       void update(uint8_t input, uint8_t power, uint32_t irq);
-      std::string get_device_class() override;
+      std::string get_device_class();
       bool is_status_binary_sensor() const override { return true; };
       float get_setup_priority() const override { return setup_priority::DATA; };
 
