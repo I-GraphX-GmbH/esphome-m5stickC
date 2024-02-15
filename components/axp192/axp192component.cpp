@@ -10,7 +10,7 @@ namespace esphome
         static const char *BINARY_TAG = "axp192.binary_sensor";
         static const char *LIGHT_TAG = "axp192.light";
 
-        std::string AXP192BinarySensor::device_class()
+        std::string AXP192BinarySensor::get_device_class()
         {
             if (monitor_ == Monitor::MONITOR_PLUGGED)
             {
