@@ -77,6 +77,11 @@ namespace esphome
             {
                 should_fire = true;
             }
+            //46:1 - short key press  0b00000000 00000000 00000010 00000000
+            if (monitor_ == Monitor::MONITOR_BUTTON && (irq_status & 0x00000200))
+            {
+                should_fire = true;
+            }
             //47:0 - bat critical low 0b00000000 00000000 00000000 00000001
             if (monitor_ == Monitor::MONITOR_CRITBAT && (irq_status & 0x00000001))
             {
@@ -123,6 +128,7 @@ namespace esphome
         {
             axp_ = new AXP192(this);
             axp_->begin(false, false, false, false, false);
+            axp_->EnablePressIRQ(true, false);
         }
 
         void AXP192Component::dump_config()

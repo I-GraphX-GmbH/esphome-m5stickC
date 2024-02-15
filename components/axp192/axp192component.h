@@ -19,6 +19,7 @@ namespace esphome
       MONITOR_LOWBAT,
       MONITOR_CRITBAT,
       MONITOR_CHARGED,
+      MONITOR_BUTTON,
     };
     class AXP192BinarySensor : public binary_sensor::BinarySensor, public Component
     {
