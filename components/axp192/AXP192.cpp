@@ -1,4 +1,6 @@
 #include "AXP192.h"
+#include "esphome/core/log.h"
+#include "esp_sleep.h"
 
 AXP192::AXP192(esphome::i2c::I2CDevice *i2c) : i2c_(i2c)
 {
@@ -23,7 +25,7 @@ void AXP192::begin(bool disableLDO2, bool disableLDO3, bool disableRTC, bool dis
     Write1Byte(0x33, 0xc0);
 
     // Depending on configuration enable LDO2, LDO3, DCDC1, DCDC3.
-    byte buf = (Read8bit(0x12) & 0xef) | 0x4D;
+    uint8_t buf = (Read8bit(0x12) & 0xef) | 0x4D;
     if (disableLDO3)
         buf &= ~(1 << 3);
     if (disableLDO2)
